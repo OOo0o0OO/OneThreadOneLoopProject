@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello ✨</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+        .hello {
+            font-size: 120px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: wave 3s infinite ease-in-out;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        @keyframes wave {
+            0%, 100% { transform: rotate(-8deg); }
+            50% { transform: rotate(8deg); }
+        }
+        .subtitle {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+            color: #555;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="hello">Hello!</div>
+        <p class="subtitle">If I have seen further than others, it is by standing upon the shoulders of giants.  🌍<br>如果我看得比其他人远，是因为我站在巨人的肩膀上</p>
+    </div>
+</body>
+</html>

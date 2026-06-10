@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>HTTP Server Test</title>
+</head>
+<body>
+    <h1>HTTP Server Test Page</h1>
+
+    <h2>1. 静态资源测试</h2>
+    <a href="/">访问 /</a><br>
+    <a href="/index.html">访问 /index.html</a><br>
+    <a href="/not_exist.html">访问不存在资源</a><br>
+
+    <h2>2. GET 测试</h2>
+    <a href="/hello">GET /hello</a><br>
+    <a href="/search?keyword=C%2B%2B&name=wyf">GET 查询参数测试</a><br>
+
+    <h2>3. POST 表单测试</h2>
+    <form action="/login" method="post">
+        <input name="username" value="wyf">
+        <input name="password" value="123456">
+        <button type="submit">POST /login</button>
+    </form>
+
+    <h2>4. 其他 HTTP 方法测试</h2>
+
+    <button onclick="sendRequest('GET', '/api/get')">GET</button>
+    <button onclick="sendRequest('POST', '/api/post', 'name=wyf&lang=C%2B%2B')">POST</button>
+    <button onclick="sendRequest('PUT', '/api/put', 'put data')">PUT</button>
+    <button onclick="sendRequest('DELETE', '/api/delete')">DELETE</button>
+    <button onclick="sendRequest('PATCH', '/api/patch', 'patch data')">PATCH</button>
+    <button onclick="sendRequest('HEAD', '/api/head')">HEAD</button>
+    <button onclick="sendRequest('OPTIONS', '/api/options')">OPTIONS</button>
+    <button onclick="sendRequest('TRACE', '/api/trace')">TRACE</button>
+
+    <h2>响应结果</h2>
+    <pre id="result"></pre>
+
+    <script>
+        async function sendRequest(method, url, body = null) {
+            try {
+                const options = {
+                    method: method,
+                    headers: {}
+                };
+
+                if (body !== null) {
+                    options.headers["Content-Type"] = "application/x-www-form-urlencoded";
+                    options.body = body;
+                }
+
+                const response = await fetch(url, options);
+                const text = method === "HEAD" ? "" : await response.text();
+
+                document.getElementById("result").textContent =
+                    "Method: " + method + "\n" +
+                    "URL: " + url + "\n" +
+                    "Status: " + response.status + " " + response.statusText + "\n" +
+                    "Content-Type: " + response.headers.get("Content-Type") + "\n" +
+                    "Content-Length: " + response.headers.get("Content-Length") + "\n\n" +
+                    text;
+            } catch (err) {
+                document.getElementById("result").textContent = "Error: " + err;
+            }
+        }
+    </script>
+</body>
+</html>
